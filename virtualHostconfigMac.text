@@ -1,0 +1,81 @@
+les fichier de configuration du domaine  se trouvent dans 
+nano /etc/hosts
+S’il n’existe pas on le crée 
+
+Exemple : daily-dev-tips.conf
+
+Puis on ajoute le domaine qu’on veut, dans ce cas 
+<VirtualHost *:80>
+    DocumentRoot /Users/esprit/www
+    ServerName daily-dev-tips.local
+
+    <Directory /Users/esprit/www>
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+PUIS il faut aller dans https.conf
+vi /etc/apache2/httpd.conf
+Et chercher 
+<IfModule dir_module>
+    DirectoryIndex index.php index.html
+</IfModule>
+On ajoute index.php
+
+Puis il faut décommander
+# Virtual hosts
+Include /private/etc/apache2/extra/httpd-vhosts.conf
+Include /private/etc/apache2/vhosts/*.conf
+
+Restart	apache
+apachectl restart
+
+Restart php
+ brew services start php
+
+Site apache Mac
+https://discussions.apple.com/docs/DOC-250007792
+
+Nom de keychain
+esprit’s CA
+
+Restart cache 
+sudo apachectl -k restart
+
+Domaines:
+Les domaines se trouves dans host
+/etc/apache2/vhosts
+
+Hosts:
+L’host se trouves dans 
+nano /etc/hosts
+
+Laravel apache:
+sudo chmod -R ugo+rw storage
+
+Laravel installation globale:
+composer global require laravel/installer:^5.4
+export PATH="$HOME/.composer/vendor/bin:$PATH"
+
+permettre php dans Mac :
+https://medium.com/@nadine.fisch/add-php-to-apache-on-macos-12-e3bb43469195
+
+Creation de certificat key dans Mac:
+https://www.simplified.guide/macos/keychain-ca-code-signing-create
+
+
+Laravel permission apache:
+https://stackoverflow.com/questions/30639174/how-to-set-up-file-permissions-for-laravel
+
+
+
+Localisation du dossier httpd:
+nano /etc/apache2/httpd.conf
+
+Localisation de localhost Mac:
+ /Library/WebServer/Documents/index.html.en
+
+Site Java resourcer:
+https://mkyong.com/
+
